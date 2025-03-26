@@ -72,8 +72,8 @@ exports.downloadIncomeExcel = async (req, res) => {
   
 
   try {
-      const incomeData = await Income.find({ userId }).sort({ date: -1 });
-      const data = incomeData.map((item) => ({
+      const income = await Income.find({ userId }).sort({ date: -1 });
+      const data = income.map((item) => ({
           
           Source: item.source,
           Amount: item.amount,
@@ -82,13 +82,11 @@ exports.downloadIncomeExcel = async (req, res) => {
 
       const wb=xlsx.utils.book_new();
       const ws=xlsx.utils.json_to_sheet(data);
-      xlsx.utils.book_append_sheet(wb, ws, 'Income Data');
+      xlsx.utils.book_append_sheet(wb, ws, "Income");
       
       xlsx.writeFile(wb,  'income_details.xlsx');
       res.download('income_details.xlsx');
-
-      
-  } catch (error) {
+} catch (error) {
       res.status(500).json({ message: "Error generating Excel file" });
   }
   
