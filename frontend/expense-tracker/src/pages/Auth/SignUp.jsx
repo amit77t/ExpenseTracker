@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout'
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
-import { validateEmail } from '../../utils/helper';
+import {validateEmail} from '../../utils/helper';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 
 
@@ -49,7 +49,7 @@ const handleSignUp =async (e)=>{
 
 setError("");
 
-  navigate('/welcome');
+  navigate("/welcome");
 }
 
   return (
