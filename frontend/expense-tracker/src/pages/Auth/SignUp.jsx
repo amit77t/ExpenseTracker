@@ -15,8 +15,8 @@ const [password, setPassword] = useState("");
 const [error, setError] = useState(null);
 
 
-
-
+  
+ 
 
 const navigate = useNavigate();
 
@@ -64,26 +64,24 @@ setError("");
 
       <ProfilePhotoSelector image={profilePic} setImage={setProfilePic}/>
 
-
-
-
-
-
-
-       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <Input
-          type="text"
-          placeholder="Full Name"
           value={fullName}
           onChange={({target}) => setFullName(target.value)}
           label="Full Name"
+          placeholder="Full Name"
+          type="text"
         />
         <Input
-          type="email"
-          placeholder="Email"
           value={email}
           onChange={({target}) => setEmail(target.value)}
           label="Email"
+          placeholder="Email"
+          type="email"
+          
+          
+          
+          
         />
 
         <div className='col-span-2'>

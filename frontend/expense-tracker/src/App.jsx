@@ -8,22 +8,23 @@ import{
       Navigate,
 
 } from "react-router-dom";
-import Login from './pages/Auth/Login';
 
+import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
 import Home from './pages/Dasboard/Home';
 import Income from './pages/Dasboard/Income';
 import Expense from './pages/Dasboard/Expense';
+import UserProvider from './context/userContext';
 
 function App() {
   return (
+
+    <UserProvider>
     <div >
      <Router>
       <Routes>
         <Route path="/" element={< Root/>} />
         <Route path="/login" element={<Login />} />
-        
-        
         <Route path="/signup" element={<SignUp />} />
          
         <Route path="/dashboard" element={<Home />} />
@@ -37,6 +38,7 @@ function App() {
      </Router> 
 
     </div>
+    </UserProvider>
   )
 }
 
@@ -51,4 +53,6 @@ const Root = () => {
   <Navigate to="/dashboard" />
 ) : (
 <Navigate to="/login" />);
-}
+
+
+};

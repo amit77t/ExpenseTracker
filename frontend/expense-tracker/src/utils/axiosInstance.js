@@ -14,15 +14,12 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
     (config) => {
-
-
-        const accessToken = localStorage.getItem('token');
+     const accessToken = localStorage.getItem("token");
         if(accessToken){
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
 
         return config;
-          
     },
     (error) => {
         return Promise.reject(error);
@@ -39,18 +36,18 @@ axiosInstance.interceptors.response.use(
 
         // Handle common errors globally
         if (error.response) {
-            if(error.response.status ===401){
+            if(error.response.status === 401){
                 // Redirect to login Page
                 window.location.href = "/login";
             }
             else if (error.response.status === 500) {
 
                 console.error("Server Error please try again later");
-            }
+            } 
           
         }  else if (error.code === "ECONNABORTED") {
 
-            console.error('Request timed out. Please try again later.');
+            console.error("Request timed out. Please try again later.");
         } 
         
         return Promise.reject(error);

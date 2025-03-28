@@ -1,17 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/userContext';
 
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword]= useState("");
   const [error, setError] = useState(null);
-
+const {updateUser} = useContext(UserContext);
+const [showPassword, setShowPassword] = useState(false);
 
 const navigate = useNavigate();
 
@@ -38,6 +40,7 @@ const handleLogin = async (e) => {
 
     const {token, user} = response.data; 
     if(token) {
+        updateUser(user);
       localStorage.setItem("token", token);
       navigate("/dashboard");
     } 
@@ -76,9 +79,8 @@ const handleLogin = async (e) => {
               onChange={({target}) => setPassword(target.value)} 
               label="Password"
               placeholder="Min 8 Character"
-              type="password" 
-
-            />
+              type={showPassword ? "text" : "password"}
+              />
             {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
             <button type="submit" className='mt-4 bg-primary text-white rounded px-4 py-2 w-full text-sm font-medium hover:bg-purple-600/15 hover:text-purple-600'>Login</button>

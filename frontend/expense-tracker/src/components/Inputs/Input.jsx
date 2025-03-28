@@ -6,7 +6,7 @@ const Input = ({value, onChange, placeholder, label, type }) =>  {
         const [showPassword, setShowPassword] = useState(false);
 
         
-        const togglePassword = () => {
+        const toggleShowPassword = () => {
             setShowPassword(!showPassword);
         };
 
@@ -22,7 +22,7 @@ const Input = ({value, onChange, placeholder, label, type }) =>  {
                 value={value}
                 onChange={(e)=> onChange(e)}
             />
-        {type === "password " && (
+        {type === "password" && (
             <> 
             {showPassword ? (<FaRegEye 
             size={22} 
@@ -32,16 +32,12 @@ const Input = ({value, onChange, placeholder, label, type }) =>  {
             size={22} 
             className='text-slate-400 cursor-pointer' 
             onClick={()=> toggleShowPassword()} />)}
-               
-            
             </>
-        
-        
-        )}
+             )}
         </div>
     </div>  
   
   )
 } 
 
-export default Input
+export default Input;
