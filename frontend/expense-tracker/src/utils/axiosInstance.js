@@ -5,8 +5,8 @@ import { BASE_URL } from "./apiPaths";
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: 10000,
-    headers: { 'Content-Type': 'application/json',
-        Accept: 'application/json'  
+    headers: { "Content-Type": "application/json",
+        Accept: "application/json",
      },
 });
 
@@ -37,6 +37,8 @@ axiosInstance.interceptors.response.use(
         // Handle common errors globally
         if (error.response) {
             if(error.response.status === 401){
+
+                console.log("Unauthorized access detected.");
                 // Redirect to login Page
                 window.location.href = "/login";
             }

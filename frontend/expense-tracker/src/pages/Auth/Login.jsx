@@ -3,17 +3,16 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
-import axiosInstance from '../../utils/axiosInstance';
+import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths';
-import { UserContext } from '../../context/userContext';
 
 
-const Login = () => {
+
+const Login= () => { 
   const [email, setEmail] = useState("");
   const [password, setPassword]= useState("");
   const [error, setError] = useState(null);
-const {updateUser} = useContext(UserContext);
-const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
 const navigate = useNavigate();
 
@@ -21,8 +20,7 @@ const handleLogin = async (e) => {
 
    e.preventDefault();
    if(!validateEmail(email)){
-    
-      setError("Invalid email format");
+    setError("Invalid email format");
       return;
    }
    if(!password) {
@@ -35,12 +33,18 @@ const handleLogin = async (e) => {
 
    // Login API Call
 
-   try{
-    const response = await axiosInstance.post( API_PATHS.AUTH.LOGIN, { email, password });
 
+
+   try {
+         const response = await axiosInstance.post( API_PATHS.AUTH.LOGIN,{
+         email, 
+         password,
+});
+    
     const {token, user} = response.data; 
     if(token) {
-        updateUser(user);
+      console.log({token, user});
+      
       localStorage.setItem("token", token);
       navigate("/dashboard");
     } 
@@ -53,7 +57,7 @@ const handleLogin = async (e) => {
       setError("Something went wrong. Please try again.");
     }
   }
-}
+};
      
 
   return (

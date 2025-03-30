@@ -31,8 +31,8 @@ const ProfilePhotoSelector = ({image, setImage}) => {
 
             <input
                 type="file"
-                ref={inputRef}
                 accept='image/*'
+                ref={inputRef}
                 onChange={handleImageChange}
                 style={{ display: 'none' }}
             />
