@@ -11,20 +11,19 @@ const dashboardRoutes=require("./routes/dashboardRoutes");
 
 
 const app = express();
-
-
-app.use(cors(
-    {
-        
-        origin: process.env.CLIENT_URL || "*", // Specify the allowed origin
-        methods: ["GET", "PUT", "POST", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
-    }
-));
-
 app.use(express.json());
 
+app.use(express.urlencoded({ extended: true })); 
 
+app.use(cors({   
+    
+     origin: process.env.CLIENT_URL || "*", // Specify the allowed origin
+         methods: ["GET","POST","PUT" ,"DELETE"],
+         allowedHeaders:["Content-Type", "Authorization"],}));
+     
+
+
+   
 connectDB();
 
 app.use("/api/v1/auth", authRoutes);
