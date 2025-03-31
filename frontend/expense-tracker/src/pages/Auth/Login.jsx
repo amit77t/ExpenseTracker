@@ -5,6 +5,7 @@ import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance.js';
 import { API_PATHS } from '../../utils/apiPaths';
+import { UserContext } from '../../context/UserContext.jsx';
 
 
 
@@ -13,6 +14,8 @@ const Login= () => {
   const [password, setPassword]= useState("");
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  const {updateUser}= useContext(UserContext);
 
 const navigate = useNavigate();
 
@@ -39,6 +42,7 @@ const handleLogin = async (e) => {
          const response = await axiosInstance.post( API_PATHS.AUTH.LOGIN,{
          email, 
          password,
+         
 });
     
     const {token, user} = response.data; 
@@ -46,6 +50,7 @@ const handleLogin = async (e) => {
       console.log({token, user});
       
       localStorage.setItem("token", token);
+      updateUser(user);
       navigate("/dashboard");
     } 
   
