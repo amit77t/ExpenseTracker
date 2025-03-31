@@ -35,7 +35,7 @@ exports.registerUser = async (req, res) => {
 };
 
 // Login User
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res) => { 
     // console.log("Received Login Request:", req.body);
 const { email, password } = req.body;
 
