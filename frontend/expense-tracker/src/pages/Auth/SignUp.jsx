@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import AuthLayout from '../../components/layouts/AuthLayout'
 import {Link, useNavigate} from 'react-router-dom';
 import Input from '../../components/Inputs/Input';
@@ -6,8 +6,10 @@ import {validateEmail} from '../../utils/helper';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
 import axiosInstance from '../../utils/axiosInstance';
 import { API_PATHS } from '../../utils/apiPaths';
-// import { UserContext } from '../../context/UserContext';
-// import uploadImage from '../../utils/uploadImage';
+import { UserContext } from '../../context/UserContext';
+import { uploadImage } from '../../utils/uploadImage';
+
+// import {uploadImage} from '../../utils/uploadImage';
 
 
 const SignUp= () => {
@@ -20,16 +22,16 @@ const [error, setError] = useState(null);
 
 
 
-//  const {updateUser}= useContext(UserContext);
+ const {updateUser}= useContext(UserContext);
 
 const navigate = useNavigate();
-
+// handle sign up frpm submit
 
 const handleSignUp =async (e)=>{
   
   e.preventDefault();
 
-  let profileImageUrl="";
+  let profileImageUrl=" ";
   if(!fullName){
     setError("Full Name is required");
     return;
@@ -57,38 +59,38 @@ setError("");
 
 
 
-// try{
-//  // upload Image if present 
-// //  if(profilePic)
-// //  {
-// //   const imgUploadRes= await uploadImage(profilePic);
-// //   profileImageUrl= imgUploadRes.imageUrl || "";
-// //  }
+try{
+ // upload Image if present 
+ if(profilePic)
+ {
+  const imgUploadRes= await uploadImage(profilePic);
+  profileImageUrl= imgUploadRes.imageUrl || "";
+ }
 
 
-//   const response=await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
-//     fullName,
-//     email,
-//     password,
-//     profileImageUrl
-//   });
+const response=await axiosInstance.post(API_PATHS.AUTH.REGISTER,{
+    fullName,
+    email,
+    password,
+    profileImageUrl
+  });
 
-//   const {token, user}= response.data;
-//   if(token){
-//     localStorage.setItem("token", token);
-//     updateUser(user);
-//     navigate("/dashboard")
+  const {token, user}= response.data;
+  if(token){
+    localStorage.setItem("token", token);
+    updateUser(user);
+    navigate("/dashboard")
 
-//   }
-// }catch(error)
-// {
-//   if(error.response && error.response.data.message){
-//     setError(error.response.data.message);
-//   }
-//   else{
-//     setError("Something went wrong. Please try again.");
-//   }
-// }
+  }
+}catch(error)
+{
+  if(error.response && error.response.data.message){
+    setError(error.response.data.message);
+  }
+  else{
+    setError("Something went wrong. Please try again.");
+  }
+}
 
 
 
