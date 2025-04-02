@@ -5,14 +5,14 @@ import TransactionInfoCard from '../Cards/TransactionInfoCard';
 
 
 
-function RecentTransactions({  transactions, onSeeMore}) {
+const RecentTransactions = ({  transactions, onSeeMore}) => {
   return (
     <div className='card'>
         <div className='flex items-center justify-between'>
             <h5 className='text-lg'>Recent Transactions</h5>
 
             <button className='card-btn' onClick={onSeeMore}>See All
-                <LuArrowRight className='text-base'/>
+                <LuArrowRight className="text-base"/>
             </button>
         </div>
        <div className='mt-6'>
@@ -25,7 +25,7 @@ function RecentTransactions({  transactions, onSeeMore}) {
                 amount={item.amount}
                 type={item.type}  
                 hideDeleteBtn
-                />
+                />  
             ))}
        </div>
 
