@@ -10,9 +10,9 @@ function CustomToolTip({active, payload}) {
 <p className='text-sm text-gray-600'>Amount:{" "}<span className='text-sm font-medium text-gray-900'>${payload[0].value}</span></p>
 
         </div>
-        )
+        );
     }
     return null;
 }
 
-export default CustomToolTip;
+export default CustomToolTip; 
