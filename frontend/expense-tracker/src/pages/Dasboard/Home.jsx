@@ -26,7 +26,6 @@ const [loading, setLoading]= useState(false);
 
 const fetchDashboardData= async()=>{
   if(loading){
-    
     return;
   }
 
@@ -36,6 +35,7 @@ const fetchDashboardData= async()=>{
     const response=await axiosInstance.get(
       `${API_PATHS.DASHBOARD.GET_DATA}`
     );
+    // console.log("API Response:", response.data);
     if(response.data) {
       setDashboardData(response.data);
     }
@@ -51,9 +51,7 @@ useEffect(() => {
  
   fetchDashboardData();
  
-  return () => {
-    
-  }
+  return () => {};
 }, []);
 
 
@@ -89,25 +87,25 @@ return (
             </div> 
            
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
-            {/* <RecentTransactions
+            <RecentTransactions
               transactions={dashboardData?.recentTransactions}
               onSeeMore={()=> navigate("/expense")}
-              />  */}
+              /> 
 
               <FinanceOverview
               totalBalance={dashboardData?.totalBalance || 0}
               totalIncome={dashboardData?.totalIncome || 0}
-              totalExpense={dashboardData?.totalExpenses || 0}
+              totalExpense={dashboardData?.totalExpense || 0}
               />
 
-               {/* <ExpenseTransactions
+               <ExpenseTransactions
                 transactions={dashboardData?.last30DaysExpenses?.transactions || []}
                 onSeeMore={() => navigate("/expense")}
-                />  */}
+                /> 
 
-               {/* <Last30DaysExpenses
+               <Last30DaysExpenses
                 data={dashboardData?.last30DaysExpenses?.transactions || []}
-                />  */}
+                /> 
 
 
                 <RecentIncomeWithChart
@@ -115,11 +113,11 @@ return (
                 totalIncome={dashboardData?.totalIncome || 0}
                    />
 
-                {/* <RecentIncome
+                <RecentIncome
                   transactions={dashboardData?.last60DaysIncome?.transactions || []} 
                    onSeeMore={() => navigate("/income")}  
 
-                /> */}
+                />
           </div>
 
 
