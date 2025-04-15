@@ -44,7 +44,7 @@ const { email, password } = req.body;
     }
 try {
         const user = await User.findOne({ email:email.trim() }); 
-        console.log("User Found:", user);
+        // console.log("User Found:", user);
 
         
         
