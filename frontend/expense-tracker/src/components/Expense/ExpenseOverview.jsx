@@ -32,7 +32,7 @@ function ExpenseOverview({transactions, onExpenseIncome}) {
 
         </div>
     </div>
-  
+   
 }
 
 export default ExpenseOverview;
